@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "1.6.20"
-    kotlin("plugin.serialization") version "1.6.20"
+    kotlin("jvm") version "2.1.20-Beta2"
+    kotlin("plugin.serialization") version "2.1.20-Beta2"
 
     `maven-publish`
 }
@@ -20,19 +20,19 @@ val exampleImplementation by configurations
 exampleImplementation.extendsFrom(configurations.implementation.get())
 
 dependencies {
-    implementation(libs.kotlin.stdlib)
-    implementation(libs.kotlinx.serialization)
-    implementation(libs.kotlinx.coroutines)
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.1.20-Beta2")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
 
-    implementation(libs.slf4j.api)
-    implementation(libs.junixsocket.core)
+    implementation("org.slf4j:slf4j-api:2.0.16")
+    implementation("com.kohlschutter.junixsocket:junixsocket-core:2.10.1")
 
     exampleImplementation(sourceSets.main.get().output)
 
     // Log4J is only used in the example project as a backend for SLF4j
-    exampleImplementation(libs.log4j.core)
-    exampleImplementation(libs.log4j.api)
-    exampleImplementation(libs.log4j.slf4j)
+    exampleImplementation("org.apache.logging.log4j:log4j-api:2.24.3")
+    exampleImplementation("org.apache.logging.log4j:log4j-core:2.24.3")
+    exampleImplementation("org.apache.logging.log4j:log4j-slf4j-impl:2.24.3")
 }
 
 publishing {

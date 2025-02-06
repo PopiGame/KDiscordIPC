@@ -15,7 +15,7 @@ suspend fun main() {
     val ipc = KDiscordIPC("945428344806183003")
     logger.info("Starting example!")
 
-    ipc.on<ReadyEvent> {
+    ipc.onEvent<ReadyEvent> {
         logger.info("Ready! (${data.user.username}#${data.user.discriminator})")
 
         // Set the user's activity (a.k.a. rich presence)
@@ -45,29 +45,29 @@ suspend fun main() {
         logger.info("Relationships: ${relationships.size}")
     }
 
-    ipc.on<DisconnectedEvent> {
+    ipc.onEvent<DisconnectedEvent> {
         logger.error("Disconnected!")
     }
 
-    ipc.on<ErrorEvent> {
+    ipc.onEvent<ErrorEvent> {
         logger.error("IPC communication error (${data.code}): ${data.message}")
     }
 
-    ipc.on<CurrentUserUpdateEvent> {
+    ipc.onEvent<CurrentUserUpdateEvent> {
         logger.info("Current user updated!")
     }
 
-    ipc.on<ActivityJoinEvent> {
+    ipc.onEvent<ActivityJoinEvent> {
         logger.info("The user has joined someone else's party! ${data.secret}")
     }
 
-    ipc.on<ActivityInviteEvent> {
+    ipc.onEvent<ActivityInviteEvent> {
         logger.info("We have been invited to join ${data.user.username}'s party! (${data.activity.party.id})")
 
         ipc.activityManager.acceptInvite(data)
     }
 
-    ipc.on<VoiceSettingsUpdateEvent> {
+    ipc.onEvent<VoiceSettingsUpdateEvent> {
         logger.info("Voice settings updated! User is now ${if (this.data.mute) "" else "not "}muted")
     }
 

@@ -22,7 +22,7 @@ class UserManager(override val ipc: KDiscordIPC) : Manager() {
         private set
 
     override suspend fun init() {
-        ipc.on<CurrentUserUpdateEvent> {
+        ipc.onEvent<CurrentUserUpdateEvent> {
             currentUser = this.data
         }
     }
